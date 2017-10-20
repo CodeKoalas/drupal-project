@@ -63,11 +63,11 @@ When installing the given `composer.json` some tasks are taken care of:
 
 ## Updating Drupal Core
 
-This project will attempt to keep all of your Drupal Core files up-to-date; the 
-project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) 
-is used to ensure that your scaffold files are updated every time drupal/core is 
-updated. If you customize any of the "scaffolding" files (commonly .htaccess), 
-you may need to merge conflicts if any of your modified files are updated in a 
+This project will attempt to keep all of your Drupal Core files up-to-date; the
+project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold)
+is used to ensure that your scaffold files are updated every time drupal/core is
+updated. If you customize any of the "scaffolding" files (commonly .htaccess),
+you may need to merge conflicts if any of your modified files are updated in a
 =======
 This project will attempt to keep all of your Drupal Core files up-to-date; the
 project [drupal-composer/drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold)
@@ -132,7 +132,13 @@ If you need to apply patches (depending on the project being modified, a pull
 request is often a better solution), you can do so with the
 [composer-patches](https://github.com/cweagans/composer-patches) plugin.
 
-To add a patch to drupal module foobar insert the patches section in the extra
+First, add the composer-patches plugin to the require section of your composer.json:
+```json
+"cweagans/composer-patches": "~1.0",
+```
+or simple run `composer require cweagans/composer-patches`.
+
+Then, to add a patch to drupal module foobar insert the patches section in the extra
 section of composer.json:
 ```json
 "extra": {
