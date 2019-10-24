@@ -58,6 +58,7 @@ services:
       - DATABASE_PASSWORD
       - DATABASE_HOST
       - DRUPAL_TRUSTED_HOSTS=${VIRTUAL_HOST}
+      - SITE_ENV
     dns:
       - ${DOCKSAL_DNS1}
       - ${DOCKSAL_DNS2}

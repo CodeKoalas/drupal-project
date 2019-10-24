@@ -29,6 +29,27 @@ $databases['default']['default'] = [
 $config_directories = [];
 $config_directories[CONFIG_SYNC_DIRECTORY] = '../config/default/default';
 
+$site_environment = getenv('SITE_ENV');
+$config['config_split.config_split.local']['status'] = FALSE;
+$config['config_split.config_split.dev']['status'] = FALSE;
+$config['config_split.config_split.stage']['status'] = FALSE;
+$config['config_split.config_split.prod']['status'] = FALSE;
+
+switch ($site_environment) {
+  case 'local':
+    $config['config_split.config_split.local']['status'] = TRUE;
+    break;
+  case 'dev':
+    $config['config_split.config_split.dev']['status'] = TRUE;
+    break;
+  case 'stage':
+    $config['config_split.config_split.stage']['status'] = TRUE;
+    break;
+  case 'prod':
+    $config['config_split.config_split.prod']['status'] = TRUE;
+    break;
+}
+
 /**
  * Include a custom settings file if it exists.
  */
