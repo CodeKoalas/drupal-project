@@ -1,0 +1,57 @@
+variables:
+  IMAGE_TAG_RELEASE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
+stages:
+- lint
+- deploy
+
+lint:
+  stage: lint
+  image: donniewest/drupal-node-container:latest
+  only:
+    - dev
+  script:
+    - cd docroot/themes/custom/THEMENAME && npm install && npm run lint
+
+build-dev:
+  image: docker:latest
+  services:
+    - docker:18-dind
+  stage: deploy
+  only:
+    - master
+  script:
+    - docker run -v $PWD:/var/www/html donniewest/drupal-node-container:latest /bin/bash -c "composer install && cd ./docroot/themes/custom/THEMENAME/ && npm install && npm run build && npm run compile"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $IMAGE_TAG_RELEASE ./
+    - docker push $IMAGE_TAG_RELEASE
+
+build-staging:
+  image: docker:latest
+  services:
+    - docker:18-dind
+  stage: deploy
+  only:
+    - /^RC-[\.\d]*/
+  except:
+    - branches
+  script:
+    - docker run -v $PWD:/var/www/html donniewest/drupal-node-container:latest /bin/bash -c "composer install && cd ./docroot/themes/custom/THEMENAME/ && npm install && npm run build && npm run compile"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:staging ./
+    - docker push $CI_REGISTRY_IMAGE:staging
+
+build-production:
+  image: docker:latest
+  services:
+    - docker:18-dind
+  stage: deploy
+  only:
+    - /^RELEASE-[\.\d]*/
+  except:
+    - branches
+  script:
+    - docker run -v $PWD:/var/www/html donniewest/drupal-node-container:latest /bin/bash -c "composer install && cd ./docroot/themes/custom/THEMENAME/ && npm install && npm run build && npm run compile"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:production ./
+    - docker push $CI_REGISTRY_IMAGE:production
