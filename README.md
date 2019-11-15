@@ -2,7 +2,7 @@
 Code Koalas Edition
 
 ## How to use
-1. `composer create-project codekoalas/koality-drupal:8.x-dev some-dir --stability dev --no-interaction`
+1. `composer create-project codekoalas/koality-drupal:8.x-dev some-dir --no-interaction`
 2. `fin up`
 3. `cp sample.settings.php docroot/sites/default/settings.php`
 4. Go to your new local site.
