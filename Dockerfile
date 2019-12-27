@@ -1,4 +1,4 @@
-FROM drupal:8.6
+FROM drupal:8.8
 
 # Set the Drush version.
 ENV DRUSH_VERSION 8.1.18
