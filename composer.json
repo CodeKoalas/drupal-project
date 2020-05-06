@@ -50,7 +50,7 @@
         "drupal/pathauto": "~1.0",
         "drupal/prlp": "^1.2",
         "drupal/revision_log_default": "^1.1",
-        "drupal/spamspam": "^1.1",
+        "drupal/spamspan": "^1.1",
         "drupal/token": "~1.0",
         "drupal/twig_tweak": "^2.0",
         "drupal/ui_patterns": "^1.1",
