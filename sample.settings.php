@@ -10,8 +10,7 @@ $settings['file_scan_ignore_directories'] = [
 $settings['entity_update_batch_size'] = 50;
 $settings['hash_salt'] = 'asotenuarchqewsmaoeuSNTH56654+';
 $settings['trusted_host_patterns'] = [
-  getenv('DRUPAL_TRUSTED_HOSTS'),
-  'nazarene-org\.docksal$',
+  getenv('DRUPAL_TRUSTED_HOSTS')
 ];
 
 $databases = [];
