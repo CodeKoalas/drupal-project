@@ -31,6 +31,8 @@ RUN rm -rf /var/www/html/*
 
 COPY ./ /var/www/html
 
+RUN chmod -R 755 /var/www/html/docroot/sites/default
+
 RUN chmod a+x ./run.sh
 
 ENTRYPOINT ["/bin/sh", "-c"]
