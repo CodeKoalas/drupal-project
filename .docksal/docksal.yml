@@ -43,7 +43,7 @@ services:
   # CLI - Used for all console commands and tools.
   cli:
     hostname: cli
-    image: docksal/cli:2.4-php7.2
+    image: docksal/cli:2.11-php7.3
     volumes:
       - project_root:/var/www:rw,nocopy  # Project root volume
       - docksal_ssh_agent:/.ssh-agent:ro  # Shared ssh-agent socket
